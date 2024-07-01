@@ -1,13 +1,12 @@
 from flask import Flask, request, render_template, jsonify
 import os
-import google.auth
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 app = Flask(__name__)
 
-# Load credentials from the JSON key file
-SERVICE_ACCOUNT_FILE = 'service-file.json'
+# Path to your service account file from an environment variable
+SERVICE_ACCOUNT_FILE = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
